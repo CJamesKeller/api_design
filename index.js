@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 // Logging
 
-// Environment-specific config
-
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,6 +19,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
-// Versioning, Build, and Release processes
-// Testing, Coverage, Linting, Nodemon scripts

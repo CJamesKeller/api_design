@@ -4,7 +4,12 @@
   "description": "A project implementing an API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "lint": "semistandard { controllers, routes, services, index.js, test-setup.js }",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "node index.js",
+    "test": "tape '{ controllers, routes, services }/**/*.test.js' | tap-spec",
+    "test:coverage": "nyc --reporter=lcov tape '{ controllers, routes, services }/**/*.test.js' | tap-spec && nyc report"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
     "express": "^4.16.3",
     "helmet": "^3.13.0"
   }
