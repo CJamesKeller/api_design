@@ -12,9 +12,13 @@ Example here
 Code block here
 ```
 
-## Usage
+## Running
 
-Usage here
+How to run described here
+
+## Testing
+
+Description of tests
 
 ## Tools Used
 
