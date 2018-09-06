@@ -1,5 +1,3 @@
-# RESTful Plan:
-- GET `/products/{id}` returns JSON
-    - Calls GET `/{id}` to obtain JSON payload
-    - Reads data from NoSQL DB and decorates response
-- PUT `/products/{id}` updates DB decorating-data
+* routes/test PUT needs properly formatted object to send and receive
+* controllers/test needs mockProduct and expectedOpts to be defined, and DB test info
+* services/test needs opts and expectedOpts to be defined

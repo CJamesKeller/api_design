@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * Sets up tape-nock for use in testing requests
+ * Largely taken from the tape-nock documentation
+ */
+
 const tape = require('tape');
 const tapeNock = require('tape-nock');
 const nock = tapeNock.nock;

@@ -2,11 +2,17 @@ const mongoose = require('mongoose');
 
 const Product = mongoose.Schema({
   current_price: {
-    value: mongoose.Schema.Types.Decimal128,
-    currency_code: mongoose.Schema.Types.String
+    value: {
+      type: mongoose.Schema.Types.Decimal128,
+      required: true
+    },
+    currency_code: {
+      type: mongoose.Schema.Types.String,
+      required: true
+    }
   }
 });
 
-module.exports = {
-  Products: mongoose.model('Products', Product)
-};
+const Products = mongoose.model('Products', Product);
+
+module.exports = { Products };

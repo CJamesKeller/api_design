@@ -1,44 +1,45 @@
 const dataService = require('../services/data.service');
-const Products = require('../store/Products');
+const { Products } = require('../store/Products');
 const log = require('../utils/logger');
 
 module.exports = {
   async getProduct (req, res) {
     const { id } = req.params;
 
-    const stored = Products.findById(id, (err, product) => {
+    const stored = await Products.findById(id, (err, product) => {
       if (err) {
         log.error(err);
-        res.sendStatus(500);
+        return res.status(500).json('Error fetching product data from database');
       }
 
       return product;
     });
 
     try {
-      let product = dataService.fetchProduct(id);
-      product = Object.assign(product, stored); // confirm
-      res.json(product);
+      let product = await dataService.fetchProduct(id);
+      product = Object.assign(product, stored);
+      return res.json(product);
     } catch (err) {
-      res.status(err.status).json(err.message);
+      return res.status(err.status || 500).json(err.message || 'Error fetching product information');
     }
   },
 
   async updateProduct (req, res) {
     const { id } = req.params;
-
-    const newProduct = new Products();
-
-    newProduct.save((err) => {
-      log.error(err);
-      res.sendStatus(500);
-    });
+    const { value, currencyMode } = req.body;
 
     try {
-      dataService.updateProduct(id);
-      res.status(204);
+      await Products.updateOne(id, { $set: { current_price: { value: value, currencyMode: currencyMode } } }, null, (err, product) => {
+        if (err) {
+          log.error(err);
+          return res.status(500).json('Error fetching product data from database');
+        }
+
+        return false;
+      });
+      return res.status(204);
     } catch (err) {
-      res.status(err.status).json(err.message);
+      return res.status(err.status || 500).json(err.message || 'Error updating product data');
     }
   }
 };

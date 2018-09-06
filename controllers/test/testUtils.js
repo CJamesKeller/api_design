@@ -9,7 +9,6 @@ module.exports = {
   mockResponse: {
     send: sinon.spy(),
     sendStatus: sinon.spy(),
-    status: () => { },
-    redirect: sinon.spy()
+    status: () => { }
   }
 };

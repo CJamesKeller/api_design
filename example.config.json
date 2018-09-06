@@ -1,3 +1,4 @@
 {
-  "MONGO_URI": ""
+  "MONGO_URI": "mongodb://localhost:27017/products",
+  "PRODUCT_API": "product-site-url-here"
 }
